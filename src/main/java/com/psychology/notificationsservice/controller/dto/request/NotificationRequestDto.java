@@ -5,4 +5,7 @@ package com.psychology.notificationsservice.controller.dto.request;
  */
 
 public class NotificationRequestDto {
+     public String getEmailAddress(){
+         return "maksimovich1911@gmail.com";
+     }
 }

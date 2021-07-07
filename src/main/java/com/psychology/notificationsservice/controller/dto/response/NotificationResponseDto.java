@@ -5,4 +5,5 @@ package com.psychology.notificationsservice.controller.dto.response;
  */
 
 public class NotificationResponseDto {
+
 }
