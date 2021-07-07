@@ -1,5 +1,7 @@
 package com.psychology.notificationsservice.service;
 
+import org.springframework.mail.javamail.JavaMailSender;
+
 public interface Sending {
-    public void sendMessages(String recipient, String message);
+    public JavaMailSender sendMessages();
 }

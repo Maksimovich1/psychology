@@ -1,8 +1,11 @@
 package com.psychology.notificationsservice.controller;
 
+import com.psychology.notificationsservice.controller.dto.request.NotificationRequestDto;
 import com.psychology.notificationsservice.controller.dto.response.NotificationResponseDto;
-import com.psychology.notificationsservice.service.MailSenderService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -11,13 +14,23 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/v1/notification/api")
 public class NotificationController {
+    public static final String FRIEND_EMAIL = "maksvv.m@yandex.by";
+
+    @Autowired
+    public JavaMailSender emailSender;
     //
-    @PostMapping("/send")
+    @GetMapping ("/send")
     public ResponseEntity<NotificationResponseDto> send() {
+        NotificationRequestDto notificationRequestDto = new NotificationRequestDto();
+        SimpleMailMessage message = new SimpleMailMessage();
 
-        MailSenderService mailSenderService = new MailSenderService();
+        message.setTo(notificationRequestDto.getEmailAddress());
+        message.setSubject("Test Simple Email");
+        message.setText("Hello, Im testing Simple Email");
 
-        mailSenderService.sendMessages("maksim02.v@gmail.com" , "god job");
+        // Send Message!
+        this.emailSender.send(message);
+
         //TODO реализовать
         // метод должен принимать объект NotificationRequestDto который должен содержать (почту на которую будет отправка и само сообщение(пока просто строка))
         // здесь нужно вызвать сервис который и будет собственно выполнять работу по отправке на почту уведомлений
