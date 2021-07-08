@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: psychology
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/psychology
+    username: root
+    password: 1111
+  h2:
+    console:
+      enabled: true
+
+  flyway:
+    url: jdbc:mysql://localhost:3306/psychology
+    user: root
+    password: 1111
