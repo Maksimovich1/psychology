@@ -1,12 +1,14 @@
 package com.psychology.notificationsservice.controller;
 
 import com.psychology.notificationsservice.controller.dto.request.NotificationRequestDto;
-import com.psychology.notificationsservice.controller.dto.response.NotificationResponseDto;
+import com.psychology.notificationsservice.service.impl.MailSenderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author andrew.maksimovich
@@ -14,22 +16,13 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/v1/notification/api")
 public class NotificationController {
-    public static final String FRIEND_EMAIL = "maksvv.m@yandex.by";
 
     @Autowired
-    public JavaMailSender emailSender;
-    //
-    @GetMapping ("/send")
-    public ResponseEntity<NotificationResponseDto> send() {
-        NotificationRequestDto notificationRequestDto = new NotificationRequestDto();
-        SimpleMailMessage message = new SimpleMailMessage();
+    public MailSenderService emailSender;
 
-        message.setTo(notificationRequestDto.getEmailAddress());
-        message.setSubject("Test Simple Email");
-        message.setText("Hello, Im testing Simple Email");
-
-        // Send Message!
-        this.emailSender.send(message);
+    @PostMapping("/send")
+    public ResponseEntity<Void> send(@RequestBody NotificationRequestDto requestDto) {
+        emailSender.sendMessages(requestDto.getEmail(), requestDto.getTextMail(), requestDto.getSubject());
 
         //TODO реализовать
         // метод должен принимать объект NotificationRequestDto который должен содержать (почту на которую будет отправка и само сообщение(пока просто строка))
@@ -40,6 +33,6 @@ public class NotificationController {
         // посмотреть настройку для отправки на емайл, сконфигурировать и попробовать сделать отправку, по пути может понадобится почта
         // gmail можно пока заюзать свою
         // пока реализовать просто отправку строки по почте
-        return ResponseEntity.ok(new NotificationResponseDto());
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
