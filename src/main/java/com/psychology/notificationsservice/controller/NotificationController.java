@@ -18,21 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class NotificationController {
 
     @Autowired
-    public MailSenderService emailSender;
+    public MailSenderService emailSender; // TODO посмотри почему ты здесь используешь MailSenderService а не Sending
 
     @PostMapping("/send")
     public ResponseEntity<Void> send(@RequestBody NotificationRequestDto requestDto) {
         emailSender.sendMessages(requestDto.getEmail(), requestDto.getTextMail(), requestDto.getSubject());
-
-        //TODO реализовать
-        // метод должен принимать объект NotificationRequestDto который должен содержать (почту на которую будет отправка и само сообщение(пока просто строка))
-        // здесь нужно вызвать сервис который и будет собственно выполнять работу по отправке на почту уведомлений
-        // сервис должен имплементить интерфейс
-        // для сервиса ножен новый пакет
-        // интерфейс должен содержать один метод по отправке нотификаций
-        // посмотреть настройку для отправки на емайл, сконфигурировать и попробовать сделать отправку, по пути может понадобится почта
-        // gmail можно пока заюзать свою
-        // пока реализовать просто отправку строки по почте
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

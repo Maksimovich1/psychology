@@ -19,7 +19,6 @@ public class MailSenderService implements Sending {
         simpleMailMessage.setSubject(subject);
         simpleMailMessage.setText(textMail);
         emailSender.send(simpleMailMessage);
-
     }
 }
 
