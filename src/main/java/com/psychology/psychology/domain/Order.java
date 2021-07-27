@@ -32,5 +32,5 @@ public class Order extends DomainObject {
     private User client;
 
     @Column(name = "date_completed")
-    private LocalDateTime dateCompleted;
+    private boolean isComplete;
 }

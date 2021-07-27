@@ -2,13 +2,12 @@ CREATE SCHEMA if not exists psychology;
 
 CREATE TABLE psychology.orders
 (
-    id             LONG        NOT NULL AUTO_INCREMENT,
-    date_create    DATETIME    NOT NULL,
-    user_id_doc    long        NOT NULL,
-    user_id_pat    long        NOT NULL,
-    date_meeting   DATETIME    NOT NULL,
-    date_completed VARCHAR(45) NULL,
-    secure_id      long        not null,
+    id           LONG     NOT NULL AUTO_INCREMENT,
+    date_create  DATETIME NOT NULL,
+    user_id_doc  long     NOT NULL,
+    user_id_pat  long     NOT NULL,
+    date_meeting DATETIME NOT NULL,
+    is_completed boolean  NULL,
     PRIMARY KEY (id)
 );
 
@@ -22,6 +21,7 @@ CREATE TABLE PSYCHOLOGY.users
     lang          VARCHAR(45) NULL,
     last_activity DATETIME    NOT NULL DEFAULT now(),
     type          VARCHAR(45) NOT NULL,
+    secure_id     long        not null,
     PRIMARY KEY (id)
 );
 
@@ -35,12 +35,12 @@ CREATE TABLE PSYCHOLOGY.secure
 );
 
 alter table psychology.orders
-    add constraint pat_user_id foreign key (user_id_pat) references psychology.users(id);
+    add constraint pat_user_id foreign key (user_id_pat) references psychology.users (id);
 
 alter table psychology.orders
-    add constraint user_id_doc foreign key (user_id_doc) references psychology.users(id);
+    add constraint user_id_doc foreign key (user_id_doc) references psychology.users (id);
 
-alter table psychology.orders
-    add constraint secure_foreign_key_id foreign key (secure_id) references psychology.secure(id);
+alter table psychology.users
+    add constraint secure_foreign_key_id foreign key (secure_id) references psychology.secure (id);
 
 
