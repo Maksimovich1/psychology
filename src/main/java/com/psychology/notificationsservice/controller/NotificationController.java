@@ -1,7 +1,7 @@
 package com.psychology.notificationsservice.controller;
 
 import com.psychology.notificationsservice.controller.dto.request.NotificationRequestDto;
-import com.psychology.notificationsservice.service.impl.MailSenderService;
+import com.psychology.notificationsservice.service.Sending;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class NotificationController {
 
     @Autowired
-    public MailSenderService emailSender; // TODO посмотри почему ты здесь используешь MailSenderService а не Sending
+    public Sending emailSender;
 
     @PostMapping("/send")
     public ResponseEntity<Void> send(@RequestBody NotificationRequestDto requestDto) {
