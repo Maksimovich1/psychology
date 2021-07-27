@@ -1,6 +1,6 @@
-package com.psychology.notificationsservice.service.impl;
+package com.psychology.psychology.service.impl;
 
-import com.psychology.notificationsservice.service.Sending;
+import com.psychology.psychology.service.Sending;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;

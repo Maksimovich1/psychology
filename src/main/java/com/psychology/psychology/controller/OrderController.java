@@ -1,4 +1,4 @@
-package com.psychology.notificationsservice.controller;
+package com.psychology.psychology.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

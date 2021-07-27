@@ -1,7 +1,6 @@
-package com.psychology.notificationsservice.domain;
+package com.psychology.psychology.domain;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 /**

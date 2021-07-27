@@ -1,7 +1,7 @@
-package com.psychology.notificationsservice.controller;
+package com.psychology.psychology.controller;
 
-import com.psychology.notificationsservice.controller.dto.request.NotificationRequestDto;
-import com.psychology.notificationsservice.service.Sending;
+import com.psychology.psychology.controller.dto.request.NotificationRequestDto;
+import com.psychology.psychology.service.Sending;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
+ * Контроллер по работе с уведомлениями
+ *
  * @author andrew.maksimovich
  */
 @RestController
@@ -20,6 +22,12 @@ public class NotificationController {
     @Autowired
     public Sending emailSender;
 
+    /**
+     * Отправка нотификации
+     *
+     * @param requestDto объект содержищий информацию о деталях отправки
+     * @return пока ничего, думаю и не нужно ничего
+     */
     @PostMapping("/send")
     public ResponseEntity<Void> send(@RequestBody NotificationRequestDto requestDto) {
         emailSender.sendMessages(requestDto.getEmail(), requestDto.getTextMail(), requestDto.getSubject());

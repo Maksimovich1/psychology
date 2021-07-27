@@ -1,4 +1,4 @@
-package com.psychology.notificationsservice.controller.dto.request;
+package com.psychology.psychology.controller.dto.request;
 
 /**
  * @author andrew.maksimovich

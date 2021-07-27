@@ -1,7 +1,7 @@
-package com.psychology.notificationsservice.controller;
+package com.psychology.psychology.controller;
 
-import com.psychology.notificationsservice.controller.dto.request.PayRequestBuyDto;
-import com.psychology.notificationsservice.controller.dto.request.PayRequestSubscribeDto;
+import com.psychology.psychology.controller.dto.request.PayRequestBuyDto;
+import com.psychology.psychology.controller.dto.request.PayRequestSubscribeDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

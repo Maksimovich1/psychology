@@ -1,4 +1,4 @@
-package com.psychology.notificationsservice.service;
+package com.psychology.psychology.service;
 
 import org.springframework.mail.MailException;
 

@@ -1,4 +1,4 @@
-package com.psychology.notificationsservice.controller.dto.response;
+package com.psychology.psychology.controller.dto.response;
 
 import lombok.Data;
 

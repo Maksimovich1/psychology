@@ -1,4 +1,4 @@
-package com.psychology.notificationsservice.domain;
+package com.psychology.psychology.domain;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,6 +1,6 @@
-package com.psychology.notificationsservice.repo;
+package com.psychology.psychology.repo;
 
-import com.psychology.notificationsservice.domain.User;
+import com.psychology.psychology.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
