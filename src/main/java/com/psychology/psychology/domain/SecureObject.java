@@ -17,5 +17,7 @@ import java.time.LocalDateTime;
 public class SecureObject extends DomainObject{
     private String login;
     private String password;
+    private String salt;
+    private String role;//TODO enam
     private LocalDateTime lastActivity;
 }

@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: psychology
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/tenerife
+    username: postgres
+    password: 1111
+
+  jpa:
+    generate-ddl: false
+
+  flyway:
+    url: jdbc:postgresql://localhost:5432/tenerife
+    user: postgres
+    password: 1111

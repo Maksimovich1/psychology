@@ -1,5 +1,8 @@
 package com.psychology.psychology.domain;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.UUID;
 
@@ -7,6 +10,8 @@ import java.util.UUID;
  * @author andrew.maksimovich
  */
 @Entity
+@Getter
+@Setter
 @Table(name = "users", schema = "psychology")
 public class User extends DomainObject {
 
