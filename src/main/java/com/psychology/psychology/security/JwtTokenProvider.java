@@ -3,13 +3,15 @@ package com.psychology.psychology.security;
 import io.jsonwebtoken.*;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.List;
 
-import static io.jsonwebtoken.SignatureAlgorithm.*;
+import static io.jsonwebtoken.SignatureAlgorithm.HS512;
 
 /**
  * @author andrew.maksimovich
@@ -23,7 +25,23 @@ public class JwtTokenProvider {
     @Value("${jwt.dayvalid:10}")
     private int countValidDay;
 
-    public String generateToken(String login) {
+    /**
+     * Генерация токена
+     *
+     * @param login логин
+     * @param pairs дополнительные параметры
+     * @return jwt токен
+     */
+    public String generateAccessToken(String login, List<Pair<String, Object>> pairs) {
+        Date date = Date.from(LocalDate.now().plusDays(countValidDay).atStartOfDay(ZoneId.systemDefault()).toInstant());
+        return Jwts.builder()
+                .setSubject(login)
+                .setExpiration(date)
+                .signWith(HS512, jwtSecret)
+                .compact();
+    }
+
+    public String generateRefreshToken(String login, List<Pair<String, Object>> pairs) {
         Date date = Date.from(LocalDate.now().plusDays(countValidDay).atStartOfDay(ZoneId.systemDefault()).toInstant());
         return Jwts.builder()
                 .setSubject(login)

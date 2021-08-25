@@ -21,18 +21,18 @@ public class PayController {
     @PostMapping("subscribe")
     public ResponseEntity<Object> subscribe(@RequestBody PayRequestSubscribeDto payRequestSubscribeDto) {
         //TODO нужно это релазовать
-        return new ResponseEntity<Object>(HttpStatus.HTTP_VERSION_NOT_SUPPORTED);
+        return new ResponseEntity<>(HttpStatus.HTTP_VERSION_NOT_SUPPORTED);
     }
 
     @PostMapping("cancel-subscribe")
     public ResponseEntity<Object> subscribeCancel(@RequestBody PayRequestSubscribeDto payRequestSubscribeDto) {
         //TODO нужно это релазовать
-        return new ResponseEntity<Object>(HttpStatus.HTTP_VERSION_NOT_SUPPORTED);
+        return new ResponseEntity<>(HttpStatus.HTTP_VERSION_NOT_SUPPORTED);
     }
 
     @PostMapping("buy")
     public ResponseEntity<Object> buy(@RequestBody PayRequestBuyDto payRequestBuyDto) {
         //TODO нужно это релазовать
-        return new ResponseEntity<Object>(HttpStatus.HTTP_VERSION_NOT_SUPPORTED);
+        return new ResponseEntity<>(HttpStatus.HTTP_VERSION_NOT_SUPPORTED);
     }
 }

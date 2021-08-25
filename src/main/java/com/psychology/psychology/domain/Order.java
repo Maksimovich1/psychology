@@ -7,8 +7,9 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 /**
- * @author andrew.maksimovich
  * Сущность представляет заказ услуги врача
+ *
+ * @author andrew.maksimovich
  * TODO еще нужно добавить платежи как минимум!
  */
 @Getter
@@ -31,6 +32,14 @@ public class Order extends DomainObject {
     @JoinColumn(name = "user_id_pat", nullable = false)
     private User client;
 
-    @Column(name = "date_completed")
+    @Column(name = "is_completed")
     private boolean isComplete;
+
+    @Column(name = "payment_type")
+    private PaymentType paymentType;
+
+    /**
+     * todo Язык который будет использоваться пользователем на приеме
+     */
+    private String lang; // тут хорошо бы иметь енам или справочник
 }

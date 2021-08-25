@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 /**
@@ -18,24 +19,21 @@ public class User extends DomainObject {
     @Column(name = "uuid_id")
     private UUID uuid;
 
-    private String name;
+    @Column(name = "second_name")
+    private String secondName;
 
+    @Column(name = "first_name")
     private String firstName;
 
-    private String email; // возможно нужна таблица, а может и нет нужно помыслить
+    private String email;
 
-    /**
-     * todo Язык который будет использоваться пользователем на приеме (хотя тогда это нужно в заказ перенести )
-     */
-    private String lang; // тут хорошо бы иметь енам или справочник
+    @Column(name = "last_activity")
+    private LocalDateTime lastActivity;
 
-    /**
-     * Тип пользователя: врач или пациент администратор и т.д
-     * тоже дожнен быть справочник
-     */
-    private String type;
+    @Column(name = "create_date")
+    private LocalDateTime createDate;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "secure_id", referencedColumnName = "id")
     private SecureObject secure;
 }

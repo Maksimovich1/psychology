@@ -1,6 +1,8 @@
 package com.psychology.psychology.service.userdetailservice;
 
+import com.psychology.psychology.domain.SecureObject;
 import com.psychology.psychology.domain.User;
+import com.psychology.psychology.repo.SecureRepository;
 import com.psychology.psychology.repo.UserRepository;
 import com.psychology.psychology.security.CustomUserDetails;
 import lombok.RequiredArgsConstructor;
@@ -16,11 +18,11 @@ import org.springframework.stereotype.Service;
 public class CustomUserDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;
+    private final SecureRepository secureRepository;
 
     @Override
     public CustomUserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        User userByLogin = userRepository.getUserByLogin(login)
-                .orElseThrow(() -> new UsernameNotFoundException("Incorrect login or password"));
-        return CustomUserDetails.fromUserEntityToCustomUserDetails(userByLogin.getSecure());
+        SecureObject secureObject = secureRepository.findByLogin(login).orElseThrow();
+        return CustomUserDetails.fromUserEntityToCustomUserDetails(secureObject);
     }
 }

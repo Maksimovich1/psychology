@@ -8,7 +8,12 @@ import com.psychology.psychology.controller.dto.response.security.LogInResponseD
 import com.psychology.psychology.service.SecurityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
 
 /**
  * @author andrew.maksimovich
@@ -27,20 +32,20 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<Void> registerUser(@RequestBody RegistrationRequestDto registrationRequestDto){
+    public ResponseEntity<Void> registerUser(@RequestBody @Valid RegistrationRequestDto registrationRequestDto) {
         //TODO нужно будет сделать маперы
         securityService.registration(registrationRequestDto);
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LogInResponseDto> registerUser(@RequestBody LogInRequestDto logInRequestDto){
+    public ResponseEntity<LogInResponseDto> registerUser(@RequestBody LogInRequestDto logInRequestDto) {
         //TODO нужно будет сделать маперы
         return ResponseEntity.ok(securityService.login(logInRequestDto));
     }
 
     @PostMapping("/forgot-password")
-    public ResponseEntity<Void> forgotPassword(@RequestBody ForgotPasswordRequestDto forgotPasswordRequestDto){
+    public ResponseEntity<Void> forgotPassword(@RequestBody ForgotPasswordRequestDto forgotPasswordRequestDto) {
         //TODO нужно будет сделать маперы
         securityService.forgot(forgotPasswordRequestDto);
         return ResponseEntity.ok().build();

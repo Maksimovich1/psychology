@@ -4,6 +4,7 @@ import com.psychology.psychology.controller.dto.request.security.ForgotPasswordR
 import com.psychology.psychology.controller.dto.request.security.LogInRequestDto;
 import com.psychology.psychology.controller.dto.request.security.RegistrationRequestDto;
 import com.psychology.psychology.controller.dto.response.security.LogInResponseDto;
+import com.psychology.psychology.domain.User;
 
 /**
  * @author andrew.maksimovich
@@ -18,4 +19,6 @@ public interface SecurityService {
     LogInResponseDto login(LogInRequestDto logInRequestDto);
 
     void forgot(ForgotPasswordRequestDto forgotPasswordRequestDto);
+
+    User getCurrentUser();
 }

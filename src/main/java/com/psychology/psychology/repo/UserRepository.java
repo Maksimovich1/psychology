@@ -11,7 +11,7 @@ import java.util.Optional;
  */
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    @Query("SELECT u FROM User u join SecureObject s where s.login = :login")
+    @Query("SELECT u FROM User u, SecureObject s where s.login = :login")
     Optional<User> getUserByLogin(String login);
 
 }

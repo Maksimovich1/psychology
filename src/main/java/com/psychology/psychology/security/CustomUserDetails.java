@@ -16,15 +16,13 @@ import static java.util.Collections.singletonList;
 public class CustomUserDetails implements UserDetails {
 
     private String login;
-    private String password;
     private Collection<? extends GrantedAuthority> grantedAuthorities;
 
 
     public static CustomUserDetails fromUserEntityToCustomUserDetails(SecureObject secureObject) {
         CustomUserDetails c = new CustomUserDetails();
         c.login = secureObject.getLogin();
-        c.password = secureObject.getPassword();
-        c.grantedAuthorities = singletonList(new SimpleGrantedAuthority(secureObject.getRole()));
+        c.grantedAuthorities = singletonList(new SimpleGrantedAuthority(secureObject.getRole().name()));
         return c;
     }
 
@@ -35,7 +33,7 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public String getPassword() {
-        return password;
+        return "";
     }
 
     @Override
