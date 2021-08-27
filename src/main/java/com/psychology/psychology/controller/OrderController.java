@@ -2,6 +2,7 @@ package com.psychology.psychology.controller;
 
 import com.psychology.psychology.domain.User;
 import com.psychology.psychology.service.SecurityService;
+import com.psychology.psychology.service.dto.UserInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +21,7 @@ public class OrderController {
 
     @GetMapping("/create")
     public ResponseEntity<Void> test(){
-        User currentUser = securityService.getCurrentUser();
+        UserInfo currentUser = securityService.getCurrentUser();
         return ResponseEntity.ok().build();
     }
 

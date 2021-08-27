@@ -2,6 +2,7 @@ package com.psychology.psychology.security.filter;
 
 import com.psychology.psychology.security.CustomUserDetails;
 import com.psychology.psychology.security.JwtTokenProvider;
+import com.psychology.psychology.service.UserSettingsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
@@ -39,14 +40,17 @@ public class JwtFilter extends OncePerRequestFilter {
 
     private final JwtTokenProvider tokenProvider;
     private final UserDetailsService userDetailsService;
+    private final UserSettingsService userSettingsService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
-        getTokenFromRequest((HttpServletRequest) httpServletRequest).ifPresent(token -> {
+        getTokenFromRequest(httpServletRequest).ifPresent(token -> {
+            log.debug("Токен безопасности пришел! токен: " + token.substring(10)) ;
             String userLogin = tokenProvider.getLoginFromToken(token);
             CustomUserDetails userDetails = (CustomUserDetails) userDetailsService.loadUserByUsername(userLogin);
             UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(auth);
+            userSettingsService.updateLastActivity(userLogin);
         });
         filterChain.doFilter(httpServletRequest, httpServletResponse);
     }

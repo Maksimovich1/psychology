@@ -4,7 +4,6 @@ import com.psychology.psychology.controller.dto.request.security.ForgotPasswordR
 import com.psychology.psychology.controller.dto.request.security.LogInRequestDto;
 import com.psychology.psychology.controller.dto.request.security.RegistrationRequestDto;
 import com.psychology.psychology.controller.dto.response.security.LogInResponseDto;
-import com.psychology.psychology.domain.Role;
 import com.psychology.psychology.domain.SecureObject;
 import com.psychology.psychology.domain.User;
 import com.psychology.psychology.exception.AppsAuthPsychologyException;
@@ -14,6 +13,7 @@ import com.psychology.psychology.repo.UserRepository;
 import com.psychology.psychology.security.JwtTokenProvider;
 import com.psychology.psychology.security.PasswordService;
 import com.psychology.psychology.service.SecurityService;
+import com.psychology.psychology.service.dto.UserInfo;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -69,9 +69,9 @@ public class CustomJwtSecurityService implements SecurityService {
 
     @Override
     public LogInResponseDto login(@NonNull LogInRequestDto logInRequestDto) {
-        SecureObject secureObject = secureRepository.findByLogin(logInRequestDto.getLogin()).orElseThrow(() -> new AppsAuthPsychologyException(() -> "Не верный логин или пароль!"));
+        SecureObject secureObject = secureRepository.findByLogin(logInRequestDto.getLogin());
         if (!passwordService.isExpectedPassword(logInRequestDto.getPassword(), secureObject.getSalt(), secureObject.getPassword())) {
-            throw new AppsAuthPsychologyException(()-> "Не верный логин или пароль!");
+            throw new AppsAuthPsychologyException();
         }
         String token = jwtTokenProvider.generateAccessToken(logInRequestDto.getLogin(), Collections.emptyList());
         //TODO нужно генерировать accsess токен и записывать его в бд
@@ -84,10 +84,16 @@ public class CustomJwtSecurityService implements SecurityService {
     }
 
     @Override
-    public User getCurrentUser() {
+    public UserInfo getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String login = authentication.getName();
-        return userRepository.getUserByLogin(login).orElseThrow(() -> new AppsPsychologyRuntimeException(() -> "Не найден пользователь"));//TODO ex
+        User userByLogin = userRepository.getUserByLogin(login);
+        //TODO нужно сделать маппер
+        UserInfo userInfo = new UserInfo();
+        userInfo.setLogin(login);
+        userInfo.setName(userByLogin.getFirstName());
+        userInfo.setSurname(userByLogin.getSecondName());
+        return userInfo;
     }
 
     private void isAvailableLogin(@NonNull String login) {
