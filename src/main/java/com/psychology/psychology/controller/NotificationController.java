@@ -2,6 +2,8 @@ package com.psychology.psychology.controller;
 
 import com.psychology.psychology.controller.dto.request.NotificationRequestDto;
 import com.psychology.psychology.service.Sending;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,10 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/v1/notification/api")
+@RequiredArgsConstructor
+@SecurityRequirement(name = "bearerAuth")
 public class NotificationController {
 
-    @Autowired
-    public Sending emailSender;
+    public final Sending emailSender;
 
     /**
      * Отправка нотификации

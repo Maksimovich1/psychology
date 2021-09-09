@@ -35,8 +35,10 @@ CREATE TABLE PSYCHOLOGY.clients
 
 CREATE TABLE PSYCHOLOGY.doctors
 (
-    id      bigserial NOT NULL,
-    user_id bigint    NOT NULL,
+    id             bigserial NOT NULL,
+    user_id        bigint    NOT NULL,
+    specialisation varchar   NOT NULL,
+    price          bigint    NOT NULL,
     PRIMARY KEY (id)
 );
 
